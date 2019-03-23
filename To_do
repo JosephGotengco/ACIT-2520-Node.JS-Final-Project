@@ -1,0 +1,34 @@
+To do:
+
+1) Home Page
+     JS user_authentication
+        If user logs in succesfully, take them to the editor
+            Load from users.JSON
+        Else Ask if they want to make an account
+           Write to users.JSON
+       
+2) Editor Page
+     User can input code (html)
+     Dynamically displays code (html)
+     
+     JS saving_file
+        Use writeFile(path,data,callback) with onkeyup()???
+     JS loading_file
+        ???????????
+        
+3) Project Page ?
+     JS load_projects
+        Lists all the projects attached to the users account
+          Check if projects are associated with users in user.JSON
+          
+          
+          
+ user.JSON object layout
+ 
+{name: Example,
+ pass: ExamplePass,
+    {project1_Example,
+     project2_Example,
+     project3_Example....etc}
+}
+     

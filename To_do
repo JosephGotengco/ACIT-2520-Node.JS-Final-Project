@@ -1,30 +1,41 @@
 To do:
 
-1) Home Page
+1) Home Page (LOG IN)
+---------------------------------------------
      JS user_authentication
-        If user logs in succesfully, take them to the editor
-            Load from users.JSON
-        Else Ask if they want to make an account
-           Write to users.JSON
-       
-2) Editor Page
-     User can input code (html)
-     Dynamically displays code (html)
-     
+        If user logs in succesfully, take them to the editor (Check users.JSON)
+        Else Returns an Invalid Login Message (Returns String)
+ ---------------------------------------------
+     JS user_create
+        If username is unique create account (Checks users.JSON) (Writes into user.JSON)
+        Else returns an Invalid Sign Up Message (Returns String)
+----------------------------------------------
+
+______________________________________________
+
+2) Editor Page (SAVING FILES)
+----------------------------------------------
+     User can input code (DONE)
+     Dynamically displays code (DONE)
+----------------------------------------------
      JS saving_file
-        Use writeFile(path,data,callback) with onkeyup()???
+          writeFile(path,data,callback) with onkeyup()
+-----------------------------------------------
      JS loading_file
-        ???????????
-        
-3) Project Page ?
-     JS load_projects
-        Lists all the projects attached to the users account
-          Check if projects are associated with users in user.JSON
-          
-          
-          
- user.JSON object layout
+        ??????????????????
+ ----------------------------------------------
  
+_____________________________________________
+
+3) Project Page (LOADING FILES)
+----------------------------------------------
+     JS load_projects
+        Checks for projects in the user's JSON obbject, Lists all the projects in user JSON (Returns list)
+----------------------------------------------        
+            
+_________________________________________________          
+ user.JSON object layout:
+ -----------------------------
 {name: Example,
  pass: ExamplePass,
     {project1_Example,

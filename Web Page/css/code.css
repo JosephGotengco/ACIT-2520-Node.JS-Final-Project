@@ -70,7 +70,9 @@ main iframe {
 footer {
   width: 100%;
   background-color: #2d3436;
-  height: 40px;
+    position: fixed;
+    left: 0;
+    bottom: 0;    height: 40px;
   padding-top: 10px;
   display: -webkit-box;
   display: -ms-flexbox;

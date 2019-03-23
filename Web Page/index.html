@@ -21,8 +21,13 @@
     </nav>
 
     <main>
-        <textarea>Type Your HTML here!</textarea>
-        <iframe></iframe>
+        <textarea id="input" onkeyup="display_code()" placeholder="Type your HTML here!"></textarea>
+    <iframe id="output">
+        <html>
+            <head></head>
+            <body></body>
+        </html>
+    </iframe>
     </main>
 
     <footer>

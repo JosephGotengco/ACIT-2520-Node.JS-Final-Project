@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower|Monoton|Orbitron|Permanent+Marker|Raleway|Teko');
 
+
+$color1: #2d3436;
+$color2: rgba( $color1, .7 );
+$color3: white;
+$nav-bg-color: lighten(black, 40%);
+$nav-color: darken(#636e72, 40%);
+$bg-color: adjust-hue($color: #636e72, $degrees: 0);
+$space1: 10px;
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -44,7 +53,7 @@ nav {
 }
 
 main {
-    background-color: black;
+    // background-color: black;
     width: 100%;
     height: 600px;
     display: grid;
@@ -55,12 +64,14 @@ main {
 
     textarea {
         resize: none;
+        background-color: $color2;
+        padding: 5px;
     }
 
     iframe {
         width: 100%;
         height: 100%;
-        background-color: 
+        background-color: $color2;
     }
 }
 

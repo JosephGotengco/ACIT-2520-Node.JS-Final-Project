@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    {{!-- <nav>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="code.html">Code</a>
+            </li>
+            <li>
+                <a href="projects.html">Projects</a>
+            </li>
+        </ul>
+    </nav> --}}
+    {{> nav}}
+
+    <main>
+        <section>
+            <p>Welcome Back!</p>
+
+            <input id="login_username" placeholder="Username">
+            <input id="login_password" placeholder="Password">
+            <button>Log In</button>
+        </section>
+        <section>
+            <p>
+                Register
+            </p>
+            <input id="register_username" placeholder="Username">
+            <input id="register_email" placeholder="Email">
+            <input id="register_password" placeholder="Password">
+            <button>Register</button>
+        </section>
+    </main>
+
+    {{> footer}}
+
+    {{!-- <footer>
+        Copyright @ 2019
+    </footer> --}}
+</body>
+<script src="js/index.js"></script>
+</html>

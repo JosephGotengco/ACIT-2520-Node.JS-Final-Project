@@ -50,8 +50,8 @@ main {
   padding: 0 10px;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-  -ms-grid-rows: 50px, 100%;
-      grid-template-rows: 50px, 100%;
+  -ms-grid-rows: 450px 150px;
+      grid-template-rows: 450px 150px;
   grid-gap: 50px;
 }
 
@@ -64,20 +64,50 @@ main textarea {
 main iframe {
   width: 100%;
   height: 100%;
-  background-color: rgba(200, 200, 200, 0.7);
+  background-color: rgba(45, 52, 54, 0.7);
+}
+
+main section {
+  -ms-grid-row: 2;
+  grid-row: 2;
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: -1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main section button {
+  font-family: 'Teko', sans-serif;
+  height: 40px;
+  width: 100px;
+  border-radius: 15px;
+  border: 2px solid white;
+  padding: 20px;
+  font-size: 25px;
+  line-height: 10px;
+  width: 100px;
+  height: 50px;
+  overflow: hidden;
+  margin-bottom: 100px;
+  z-index: 1;
 }
 
 footer {
   width: 100%;
   background-color: #2d3436;
-    position: fixed;
-    left: 0;
-    bottom: 0;    height: 40px;
+  height: 40px;
   padding-top: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -85,8 +115,5 @@ footer {
       -ms-flex-align: center;
           align-items: center;
   font-family: 'Teko', sans-serif;
-}
-textarea {
-    color: #fff;
 }
 /*# sourceMappingURL=code.css.map */

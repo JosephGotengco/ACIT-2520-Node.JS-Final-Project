@@ -2,6 +2,8 @@
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+
+  bottom:0;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -9,6 +11,7 @@
 
 body {
   background-image: url("../images/mountain.jpg");
+
   background-size: cover;
 }
 
@@ -48,7 +51,7 @@ main {
   display: -ms-grid;
   display: grid;
   padding: 0 10px;
-  -ms-grid-columns: (1fr)[2];
+  -ms-grid-columns:(1fr)[2];
       grid-template-columns: repeat(2, 1fr);
   -ms-grid-rows: 450px 150px;
       grid-template-rows: 450px 150px;
@@ -102,6 +105,8 @@ main section button {
 
 footer {
   width: 100%;
+  bottom: 0;
+  position: fixed;
   background-color: #2d3436;
   height: 40px;
   padding-top: 10px;

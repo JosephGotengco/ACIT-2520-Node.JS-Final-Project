@@ -9,17 +9,30 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+    {{!-- <nav>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="code.html">Code</a>
+            </li>
+            <li>
+                <a href="projects.html">Projects</a>
+            </li>
+        </ul>
+    </nav> --}}
     {{> nav}}
 
     <main>
         <section>
             <p>Welcome Back!</p>
-            <form method="GET" action="/login">
+            <form method="POST" action="/login">
                 <input type="text" name="username" placeholder="Username">
-                <input type="text" name="username" placeholder="Password">
+                <input type="text" name="password" placeholder="Password">
                 <input type="submit" value="Submit">
             </form>
-            <p>{{error}}</p>
+            <p>{{success_login}}</p>
         </section>
         <section>
             <p>Register</p>
@@ -29,7 +42,7 @@
                     <input type="text" name="password" placeholder="Password" required>
                     <input type="submit" value="Submit">
                 </form>
-            <p>{{success}}</p>
+            <p>{{success_register}}</p>
         </section>
     </main>
 

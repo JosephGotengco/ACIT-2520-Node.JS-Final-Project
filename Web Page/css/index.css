@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Indie+Flower|Monoton|Orbitron|Permanent+Marker|Raleway|Teko");
 * {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -19,11 +19,11 @@ nav {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 nav ul {
@@ -47,11 +47,11 @@ main {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   height: 600px;
 }
 
@@ -68,6 +68,7 @@ main section:nth-child(1) {
 }
 
 main section:nth-child(1) input {
+  overflow-y: hidden;
   border-radius: 15px;
   border: 2px solid #74b9ff;
   padding: 20px;
@@ -107,6 +108,7 @@ main section:nth-child(2) p, main section:nth-child(2) button {
 }
 
 main section:nth-child(2) input {
+  overflow-y: hidden;
   border-radius: 15px;
   border: 2px solid #74b9ff;
   padding: 20px;
@@ -134,11 +136,11 @@ footer {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-family: 'Teko', sans-serif;
 }
 /*# sourceMappingURL=index.css.map */

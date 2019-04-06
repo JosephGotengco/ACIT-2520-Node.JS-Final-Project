@@ -127,8 +127,6 @@ main section:nth-child(2) button {
 
 footer {
   width: 100%;
-  bottom: 0;
-  position: fixed;
   background-color: #2d3436;
   height: 40px;
   padding-top: 10px;

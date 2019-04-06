@@ -9,40 +9,25 @@
     <link rel="stylesheet" href="css/code.css">
 </head>
 <body>
-    {{!-- <nav>
-        <ul>
-            <li>
-                    <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a href="code.html">Code</a>
-            </li>
-            <li>
-                <a href="projects.html">Projects</a>
-            </li>
-        </ul>
-    </nav> --}}
     {{> nav}}
-
-    <main>
-
-        <textarea id="input" onkeyup="display_code()" placeholder="Type your HTML here!"></textarea>
-    <iframe id="output">
-        <html>
-            <head></head>
-            <body></body>
-        </html>
-    </iframe>
-    <section>
-        <button>Save</button>
-    </section>
-    </main>
+    <form method="POST" action="/code-save">
+        <main>
+                <input type="hidden" name="username" id="username" value={{username}} />
+                <textarea type="text" name="data" id="input" onkeyup="display_code()" placeholder="Type your HTML here!" required></textarea>
+        <iframe id="output">
+            <html>
+                <head></head>
+                <body></body>
+            </html>
+        </iframe>
+        <section>
+            <input type="submit" value="Submit">
+        </section>
+        </main>
+        <p>{{success}}</p>
+    </form>
 
     {{> footer}}
-
-    {{!-- <footer>
-        Copyright @ 2019
-    </footer> --}}
 </body>
 <script src="js/code.js"></script>
 </html>

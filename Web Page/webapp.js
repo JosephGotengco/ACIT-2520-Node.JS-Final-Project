@@ -25,7 +25,7 @@ app.get('/code', (request, response) => {
     response.render('code.hbs', {
         title: 'Code Page',
         header: "This is about me!"
-    });
+    })
 });
 
 app.get('/projects', (request, response) => {

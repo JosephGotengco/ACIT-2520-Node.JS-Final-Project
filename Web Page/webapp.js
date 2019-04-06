@@ -1,6 +1,8 @@
 const express = require('express');
 // const axios = require('axios');
 const hbs = require('hbs');
+const utils = require('./utils.js');
+const bodyParser = require('body-parser');
 
 var app = express();
 
@@ -12,7 +14,10 @@ app.set('view engine', 'hbs');
 
 // Web Pages
 app.use(express.static(__dirname));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.get('/', (request, response) => {
     response.render('index.hbs', {
@@ -35,5 +40,17 @@ app.get('/projects', (request, response) => {
     });
 });
 
-app.listen(8080);
-console.log("Webapp is now operational!")
+app.listen(8080, () => {
+    console.log('Server is up and running');
+    utils.init()
+});
+
+
+
+app.post('/register', function (req, res) {
+    var db = utils.getDb();
+    db.collection('users').insertOne(req.body);
+    res.render('index.hbs', {
+        success: 'Thank You for Registering!'
+    })
+});

@@ -1,36 +1,84 @@
 const express = require('express');
-// const axios = require('axios');
 const hbs = require('hbs');
+const bodyParser = require('body-parser')
 const utils = require('./utils.js');
-const bodyParser = require('body-parser');
+var session = require('express-session');
 
 var app = express();
 
-// Partials
+// Cookie Code
+// Ignore this line underneath I just copied it from a website LOL
+app.use(session({secret: 'XASDASDA'}));
+var ssn ;
+// Cookie Code
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+// Partialsclear
 hbs.registerPartials(__dirname + '/partials');
 
-app.set('views', __dirname);
+app.set('views', __dirname + '\\Web Page');
 app.set('view engine', 'hbs');
 
 // Web Pages
-app.use(express.static(__dirname));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(express.static(__dirname + '/Web Page'));
+
 
 app.get('/', (request, response) => {
+    ssn=request.session;
     response.render('index.hbs', {
         title: "Home Page",
         header: "Welcome to Home!"
+    });
+    ssn.comport;
+    ssn.command;
+});
+
+app.post('/register', function (request, response) {
+    var db = utils.getDb();
+    db.collection('users').insertOne(request.body);
+    response.render('index.hbs', {
+        success: 'Thank You for Registering!'
     });
 });
 
 app.get('/code', (request, response) => {
     response.render('code.hbs', {
         title: 'Code Page',
-        header: "This is about me!"
+        header: "This is about me!",
+        username: ssn.username
     });
+});
+
+app.post('/code-save', (request, response) => {
+    var db = utils.getDb();
+
+    username = request.body.username
+    console.log(username);
+
+    data = request.body.data
+    console.log(data);
+
+    db.collection('users').insertOne({username: username, data: data});
+
+    response.render('code.hbs', {
+        success: 'File Has Been Saved!'
+    })
+})
+
+app.get('/code-get', function(request, response) {
+    var db = utils.getDb();
+    username = request.body.username;
+    console.log(username);
+
+    db.collection('users').find({username: username}).toArray((err, items) => {
+        response.send(items);
+    });
+    
 });
 
 app.get('/projects', (request, response) => {
@@ -45,37 +93,22 @@ app.listen(8080, () => {
     utils.init()
 });
 
+
+
 app.post('/login', (request, response) => {
+    ssn = request.session;
     var db = utils.getDb();
-    db.collection('users').find({}).toArray((err, result) => {
-        if (err) {
-            response.send('Unable to get login right now');
-        }
-        for (i=0; i < result.length; i++) {
-            if (request.body.username === result[i].username) {
-                if (request.body.password === result[i].password) {
-                    console.log('hey');
-                    response.render('index.hbs', {
-                        success_login: 'You are logged in!'
-                    })
-                } else {
-                    response.render('index.hbs', {
-                        success_login: 'Invalid login info'
-                    })
-                }
-            } else {
-                response.render('index.hbs', {
-                    success_login: 'Invalid login info'
-                })
-            }
+    db.collection('users').find(request.body).toArray((err, result) => {
+        if (result.length === 0) {
+            response.render('index.hbs', {
+                success_login: 'Invalid Login Info!'
+            })
+        } else {
+            response.render('index.hbs', {
+                success_login: 'You Are Now Logged In!'
+            })
+            ssn.username=request.body.username;
+            ssn.password=request.body.password;
         }
     });
-});
-
-app.post('/register', function (req, res) {
-    var db = utils.getDb();
-    db.collection('users').insertOne(req.body);
-    res.render('index.hbs', {
-        success_register: 'Thank You for Registering!'
-    })
 });

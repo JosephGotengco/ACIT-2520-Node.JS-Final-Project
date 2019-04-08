@@ -21,11 +21,11 @@ app.use(bodyParser.urlencoded({
 // Partialsclear
 hbs.registerPartials(__dirname + '/partials');
 
-app.set('views', __dirname + '\\Web Page');
+app.set('views', __dirname );
 app.set('view engine', 'hbs');
 
 // Web Pages
-app.use(express.static(__dirname + '/Web Page'));
+app.use(express.static(__dirname ));
 
 
 app.get('/', (request, response) => {
@@ -42,7 +42,7 @@ app.post('/register', function (request, response) {
     var db = utils.getDb();
     db.collection('users').insertOne(request.body);
     response.render('index.hbs', {
-        success: 'Thank You for Registering!'
+        success_register: 'Thank You for Registering!'
     });
 });
 
@@ -79,13 +79,6 @@ app.get('/code-get', function(request, response) {
         response.send(items);
     });
     
-});
-
-app.get('/projects', (request, response) => {
-    response.render('projects.hbs', {
-        title: 'Project Page',
-        header: "This is about me!"
-    });
 });
 
 app.listen(8080, () => {

@@ -97,8 +97,9 @@ app.post('/login', (request, response) => {
                 success_login: 'Invalid Login Info!'
             })
         } else {
-            response.render('index.hbs', {
-                success_login: 'You Are Now Logged In!'
+            response.render('code.hbs', {
+            // response.render('index.hbs', {
+            //     success_login: 'You Are Now Logged In!'
             })
             ssn.username=request.body.username;
             ssn.password=request.body.password;

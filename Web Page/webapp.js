@@ -9,7 +9,7 @@ var app = express();
 // Cookie Code
 // Ignore this line underneath I just copied it from a website LOL
 app.use(session({secret: 'XASDASDA'}));
-var ssn ;
+var ssn;
 // Cookie Code
 
 
@@ -21,15 +21,15 @@ app.use(bodyParser.urlencoded({
 // Partialsclear
 hbs.registerPartials(__dirname + '/partials');
 
-app.set('views', __dirname );
+app.set('views', __dirname);
 app.set('view engine', 'hbs');
 
 // Web Pages
-app.use(express.static(__dirname ));
+app.use(express.static(__dirname));
 
 
 app.get('/', (request, response) => {
-    ssn=request.session;
+    ssn = request.session;
     response.render('index.hbs', {
         title: "Home Page",
         header: "Welcome to Home!"
@@ -37,14 +37,35 @@ app.get('/', (request, response) => {
     ssn.comport;
     ssn.command;
 });
+//
+// app.post('/register', function (request, response) {
+//     var db = utils.getDb();
+//     db.collection('users').insertOne(request.body);
+//     response.render('index.hbs', {
+//         success_register: 'Thank You for Registering!'
+//     });
+// });
+
 
 app.post('/register', function (request, response) {
     var db = utils.getDb();
-    db.collection('users').insertOne(request.body);
-    response.render('index.hbs', {
-        success_register: 'Thank You for Registering!'
+    db.collection('users').find(request.body).toArray((err, result) => {
+        if (result.length === 0) {
+            db.collection('users').insertOne(request.body);
+            response.render('index.hbs', {
+                success_register: 'Thank You for Registering!'
+            })
+        }else{
+            response.render('index.hbs', {
+                success_register: 'Account Exists'
+            })
+
+
+
+        }
     });
 });
+
 
 app.get('/code', (request, response) => {
     response.render('code.hbs', {
@@ -70,7 +91,7 @@ app.post('/code-save', (request, response) => {
     })
 })
 
-app.get('/code-get', function(request, response) {
+app.get('/code-get', function (request, response) {
     var db = utils.getDb();
     username = request.body.username;
     console.log(username);
@@ -78,14 +99,13 @@ app.get('/code-get', function(request, response) {
     db.collection('users').find({username: username}).toArray((err, items) => {
         response.send(items);
     });
-    
+
 });
 
 app.listen(8080, () => {
     console.log('Server is up and running');
     utils.init()
 });
-
 
 
 app.post('/login', (request, response) => {
@@ -98,11 +118,11 @@ app.post('/login', (request, response) => {
             })
         } else {
             response.render('code.hbs', {
-            // response.render('index.hbs', {
-            //     success_login: 'You Are Now Logged In!'
+                // response.render('index.hbs', {
+                //     success_login: 'You Are Now Logged In!'
             })
-            ssn.username=request.body.username;
-            ssn.password=request.body.password;
+            ssn.username = request.body.username;
+            ssn.password = request.body.password;
         }
     });
 });

@@ -72,23 +72,42 @@ app.get('/code', (request, response) => {
     });
 });
 
+// app.post('/code-save', (request, response) => {
+//     var db = utils.getDb();
+//     username = ssn.username
+//     console.log(username);
+//     data = request.body.data
+//     console.log(data);
+//
+//      // db.collection('users').insertOne({username: username, data: data});
+//     //db.collection.update(find(username), data: data)
+//     // db.collection('users').find(request.username).toArray((err, result) => {
+//     //
+//     //
+//     //     }
+//
+//     // request.body["data"] = data;
+//     response.render('code.hbs', {
+//         success: 'File Has Been Saved!'
+//     })
+// })
 app.post('/code-save', (request, response) => {
     var db = utils.getDb();
 
-    username = ssn.username
+    username = request.body.username
     console.log(username);
 
     data = request.body.data
     console.log(data);
 
-     db.collection('users').insertOne({username: username, data: data});
-    //db.collection.update(find(username), data: data)
-    // db.collection('users').find(request.username).toArray((err, result) => {
-    //
-    //
-    //     }
+    db.collection('users').findOneAndUpdate({username: username}, {'$set': {'data': data}}, (err, item) => {
+        console.log(item)
+    });
     response.render('code.hbs', {
-        success: 'File Has Been Saved!'
+        success: 'File Has Been Saved!',
+        title: 'Code Page',
+        header: "This is about me!",
+        username: ssn.username
     })
 })
 
@@ -118,12 +137,10 @@ app.post('/login', (request, response) => {
                 success_login: 'Invalid Login Info!'
             })
         } else {
-            response.render('code.hbs', {
-                // response.render('index.hbs', {
-                //     success_login: 'You Are Now Logged In!'
+            response.render('index.hbs', {
+                success_login: 'Login succesful!'
+
             })
-            ssn.username = request.body.username;
-            ssn.password = request.body.password;
-        }
-    });
+            }
+        })
 });

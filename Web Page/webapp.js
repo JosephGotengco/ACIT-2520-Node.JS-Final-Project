@@ -95,13 +95,13 @@ app.post('/code-save', (request, response) => {
     db.collection('users').findOneAndUpdate({username: username}, {'$set': {'data': data}}, (err, item) => {
         console.log(item)
     });
-
     response.render('code.hbs', {
-        success: 'File Has Been Saved!',
         title: 'Code Page',
+        success: "File Has Been Saved",
         header: "This is about me!",
-        username: ssn.username
-    })
+        username: ssn.username,
+        data: data
+    });
 })
 
 // --------------- code page  --------------- //

@@ -48,6 +48,7 @@ app.get('/', (request, response) => {
 
 app.post('/register', function (request, response) {
     var db = utils.getDb();
+    request.body["data"] = "";
     db.collection('users').find(request.body).toArray((err, result) => {
         if (result.length === 0) {
             db.collection('users').insertOne(request.body);
@@ -80,9 +81,12 @@ app.post('/code-save', (request, response) => {
     data = request.body.data
     console.log(data);
 
-    db.collection('users').insertOne({username: username, data: data});
-
+     db.collection('users').insertOne({username: username, data: data});
     //db.collection.update(find(username), data: data)
+    // db.collection('users').find(request.username).toArray((err, result) => {
+    //
+    //
+    //     }
     response.render('code.hbs', {
         success: 'File Has Been Saved!'
     })

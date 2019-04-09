@@ -9,25 +9,25 @@
     <link rel="stylesheet" href="css/code.css">
 </head>
 <body>
-    {{> nav}}
-    <form method="POST" action="/code-save">
-        <main>
-                <input type="hidden" name="username" id="username" value={{username}} />
-                <textarea type="text" name="data" id="input" onkeyup="display_code()" placeholder="Type your HTML here!" required></textarea>
+{{> nav}}
+<form method="POST" action="/code-save">
+    <main>
+        <input type="hidden" name="username" id="username" value={{username}} />
+        <textarea type="text" name="data" id="input" onkeyup="display_code()" placeholder="Starting Typing Here">{{data}}</textarea>
         <iframe id="output">
             <html>
-                <head></head>
-                <body></body>
+            <head></head>
+            <body></body>
             </html>
         </iframe>
         <section>
             <input type="submit" value="Submit">
         </section>
-        </main>
-        <p>{{success}}</p>
-    </form>
+    </main>
 
-    {{> footer}}
+</form>
+<p>{{success}}</p>
+{{> footer}}
 </body>
 <script src="js/code.js"></script>
 </html>

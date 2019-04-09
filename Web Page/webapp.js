@@ -46,7 +46,6 @@ app.get('/', (request, response) => {
 //     });
 // });
 
-
 app.post('/register', function (request, response) {
     var db = utils.getDb();
     db.collection('users').find(request.body).toArray((err, result) => {
@@ -57,11 +56,8 @@ app.post('/register', function (request, response) {
             })
         }else{
             response.render('index.hbs', {
-                success_register: 'Account Exists'
+                success_register: 'Account Already Exists'
             })
-
-
-
         }
     });
 });
@@ -78,7 +74,7 @@ app.get('/code', (request, response) => {
 app.post('/code-save', (request, response) => {
     var db = utils.getDb();
 
-    username = request.body.username
+    username = ssn.username
     console.log(username);
 
     data = request.body.data
@@ -86,6 +82,7 @@ app.post('/code-save', (request, response) => {
 
     db.collection('users').insertOne({username: username, data: data});
 
+    //db.collection.update(find(username), data: data)
     response.render('code.hbs', {
         success: 'File Has Been Saved!'
     })

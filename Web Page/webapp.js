@@ -112,10 +112,10 @@ app.post('/code-save', (request, response) => {
     username = request.body.username;
     console.log(username);
 
-    data = request.body.data;
-    console.log(data);
+    ssn.data = request.body.data;
+    console.log(ssn.data);
 
-    db.collection('users').findOneAndUpdate({username: username}, {'$set': {'data': data}}, (err, item) => {
+    db.collection('users').findOneAndUpdate({username: username}, {'$set': {'data': ssn.data}}, (err, item) => {
         console.log(item)
     });
     response.render('code.hbs', {
@@ -123,7 +123,7 @@ app.post('/code-save', (request, response) => {
         success: "File Has Been Saved",
         header: "This is about me!",
         username: ssn.username,
-        data: data
+        data: ssn.data
     });
 });
 

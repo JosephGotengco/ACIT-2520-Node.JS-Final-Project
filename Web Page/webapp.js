@@ -1,8 +1,10 @@
 const express = require('express');
 const hbs = require('hbs');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const utils = require('./utils.js');
 var session = require('express-session');
+
+const port = process.env.PORT || 8080;
 
 var app = express();
 
@@ -37,14 +39,23 @@ app.get('/', (request, response) => {
     ssn.comport;
     ssn.command;
 });
+
 app.post('/register', function (request, response) {
     var db = utils.getDb();
-    request.body["data"] = ""
-    db.collection('users').insertOne(request.body);
-    response.render('index.hbs', {
-        success_register: 'Thank You for Registering!'
+    request.body["data"] = "";
+    db.collection('users').find({email: `${request.body.email}`}).toArray().then(function (result) {
+        if (result.length === 0) {
+            db.collection('users').insertOne(request.body);
+            response.render('index.hbs', {
+                success_register: 'Thank You for Registering!'
+            })
+        } else {
+            response.render('index.hbs', {
+            success_register: 'User already exists, please login with that email or change it'});
+        }
     });
 });
+
 app.post('/login', (request, response) => {
     ssn = request.session;
     var db = utils.getDb();
@@ -56,7 +67,7 @@ app.post('/login', (request, response) => {
         } else {
             response.render('index.hbs', {
                 success_login: 'You Are Now Logged In!'
-            })
+            });
         
             ssn.username=request.body.username;
             ssn.password=request.body.password;
@@ -70,10 +81,16 @@ app.post('/login', (request, response) => {
 
 // --------------- code page  --------------- //
 app.get('/code', (request, response) => {
+    if (ssn.username === undefined) {
+        response.render('index.hbs', {
+            success_login: "Please login or register first!"
+        });
+        return;
+    }
     var db = utils.getDb();
     db.collection('users').find({username: ssn.username}).toArray((err, items) => {
         console.log(items);
-        data = items[0]["data"]
+        data = items[0]["data"];
         response.render('code.hbs', {
             title: 'Code Page',
             header: "This is about me!",
@@ -84,12 +101,18 @@ app.get('/code', (request, response) => {
 });
 
 app.post('/code-save', (request, response) => {
+    if (ssn.username === undefined) {
+        response.render('index.hbs', {
+            success_login: "Please login or register first!"
+        });
+        return;
+    }
     var db = utils.getDb();
 
-    username = request.body.username
+    username = request.body.username;
     console.log(username);
 
-    data = request.body.data
+    data = request.body.data;
     console.log(data);
 
     db.collection('users').findOneAndUpdate({username: username}, {'$set': {'data': data}}, (err, item) => {
@@ -102,16 +125,16 @@ app.post('/code-save', (request, response) => {
         username: ssn.username,
         data: data
     });
-})
+});
 
 // --------------- code page  --------------- //
 
 
-app.listen(8080, () => {
+app.listen(port, () => {
     console.log('Server is up and running');
     utils.init()
 });
 
 
-//oh god
+
 

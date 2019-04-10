@@ -4,5 +4,3 @@ function display_code() {
     document.getElementById('output').srcdoc = user_code;
 }
 window.onload = display_code();
-
-//what
